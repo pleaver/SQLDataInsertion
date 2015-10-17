@@ -119,11 +119,29 @@ public class Customer {
         "Shala Stocker",
         "Barrett Cruise"
     };
+    private static final int[] addrNums = new int[] {
+        1334, 23, 1921, 1761, 2531, 97, 638, 1702, 21, 342,
+        563, 8913, 2341, 453, 92, 18, 3592, 801, 482, 9401
+    };
+    private static final String[] streets = new String[] {
+        "Clearance Blvd", "Mission Ave", "First St", "Third St", "Lakefront Ln",
+        "Kingdom Blvd", "Main St", "Frontview Ave", "Ocean Ave", "Pier Ln"
+    };
+    private static final String[] cities = new String[] {
+        "Hollywood", "New York", "San Francisco", "Seattle", "Las Vegas"
+    };
+    private static final String[] states = new String[] {
+        "CA", "MI", "TX", "NY", "VA"
+    };
+    private static final int[] zips = new int[] {
+        93701, 93205, 41023, 31056, 92542
+    };
     
     public Customer() {
         SSN = getRandomSSN();
         name = getRandomName();
-        
+        address = getRandomAddress();
+        phone = getRandomPhone();
     }
     
     private String getRandomName() {
@@ -137,10 +155,47 @@ public class Customer {
     }
     
     private String getRandomAddress() {
+        StringBuilder addressBuilder = new StringBuilder();
+        int randAddrNumNdx = random.nextInt(addrNums.length - 1);
+        int randStreetNdx = random.nextInt(streets.length - 1);
+        int randCityNdx = random.nextInt(cities.length - 1);
+        int randStateNdx = random.nextInt(states.length - 1);
+        int randZipNdx = random.nextInt(zips.length - 1);
         
+        addressBuilder.append(addrNums[randAddrNumNdx]);
+        addressBuilder.append(" ").append(streets[randStreetNdx]);
+        addressBuilder.append(", ").append(cities[randCityNdx]);
+        addressBuilder.append(", ").append(states[randStateNdx]);
+        addressBuilder.append(", ").append(zips[randZipNdx]);
+        
+        return addressBuilder.toString();
     }
     
-    public String getRandomPhone() {
+    private String getRandomPhone() {
+        StringBuilder phoneBuilder = new StringBuilder();
+        int areaCode = random.nextInt(999 - 100) + 100;
+        phoneBuilder.append("(").append(areaCode).append(")");
+        int prefix = random.nextInt(999 - 100) + 100;
+        phoneBuilder.append(prefix).append("-");
+        int suffix = random.nextInt(9999 - 1000) + 1000;
+        phoneBuilder.append(suffix);
         
+        return phoneBuilder.toString();
+    }
+    
+    public String getName() {
+        return name;
+    }
+    
+    public int getSSN() {
+        return SSN;
+    }
+    
+    public String getAddress() {
+        return address;
+    }
+    
+    public String getPhone() {
+        return phone;
     }
 }
