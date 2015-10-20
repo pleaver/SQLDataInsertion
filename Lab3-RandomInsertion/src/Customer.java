@@ -11,6 +11,7 @@ import java.util.Random;
  * @author yangpan
  */
 public class Customer {
+    private int cId;
     private int SSN;
     private String name;
     private String address;
@@ -137,7 +138,8 @@ public class Customer {
         93701, 93205, 41023, 31056, 92542
     };
     
-    public Customer() {
+    public Customer(int id) {
+        cId = id;
         SSN = getRandomSSN();
         name = getRandomName();
         address = getRandomAddress();
@@ -197,5 +199,9 @@ public class Customer {
     
     public String getPhone() {
         return phone;
+    }
+    
+    public int getId() {
+        return cId;
     }
 }
