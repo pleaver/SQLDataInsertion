@@ -72,8 +72,32 @@ public class DataInsertDriver {
         FileWriter ownWriter = new FileWriter(ownFile);
         
         for (int i = 0; i < customers.size(); i++) {
-            ownWriter.write("insert into ownership(customerId, creditCardNumber, isCurrent) " 
-                    + "values(" + customers.get(i).getId() + ", \"" + cards.get(i).getNumber() + "\", " + random.nextBoolean() + ");\n");
+            /*for (int j = 0; j < random.nextInt(3 - 1) + 1; j++) {
+                ownWriter.write("insert into ownership(customerId, creditCardNumber, isCurrent) " 
+                    + "values(" + customers.get(j).getId() + ", \"" + cards.get(i).getNumber() + "\", " + random.nextBoolean() + ");\n");
+            }*/
+            if (i % 3 == 0) {
+                ownWriter.write("insert into ownership(customerId, creditCardNumber, isCurrent) "
+                    + "values (" + customers.get(i).getId() + ", \"" + cards.get(i).getNumber() + "\", " + random.nextBoolean() + ");\n");
+                
+                ownWriter.write("insert into ownership(customerId, creditCardNumber, isCurrent) "
+                    + "values (" + customers.get(i).getId() + ", \"" + cards.get((cards.size() - 1) - i).getNumber() + "\", " + random.nextBoolean() + ");\n");
+                
+                ownWriter.write("insert into ownership(customerId, creditCardNumber, isCurrent) "
+                    + "values (" + customers.get(i).getId() + ", \"" + cards.get((cards.size() - 1) - random.nextInt(cards.size() - 1)).getNumber() + "\", " + random.nextBoolean() + ");\n");
+            }
+            else if (i % 2 == 0) {
+                ownWriter.write("insert into ownership(customerId, creditCardNumber, isCurrent) "
+                    + "values (" + customers.get(i).getId() + ", \"" + cards.get(i).getNumber() + "\", " + random.nextBoolean() + ");\n");
+                
+                ownWriter.write("insert into ownership(customerId, creditCardNumber, isCurrent) "
+                    + "values (" + customers.get(i).getId() + ", \"" + cards.get(cards.size() - i).getNumber() + "\", " + random.nextBoolean() + ");\n");
+            }
+            else {
+                ownWriter.write("insert into ownership(customerId, creditCardNumber, isCurrent) "
+                    + "values (" + customers.get(i).getId() + ", \"" + cards.get(i).getNumber() + "\", " + random.nextBoolean() + ");\n");
+            }
+            
         }
         ownWriter.flush();
         ownWriter.close();
